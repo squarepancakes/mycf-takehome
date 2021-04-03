@@ -27,4 +27,17 @@ const getAllFiles = (dir) => {
   return fileList;
 };
 
-module.exports = { getAllFiles };
+const searchFiles = (dir, searchFilter) => {
+  const directoryExists = fs.existsSync(dir);
+  if (!directoryExists) {
+    return 'No such directory';
+  }
+
+  const allFilesInDir = getAllFiles(dir);
+
+  if (!searchFilter) {
+    return allFilesInDir;
+  }
+};
+
+module.exports = { getAllFiles, searchFiles };

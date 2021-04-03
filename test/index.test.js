@@ -1,4 +1,4 @@
-const { getAllFiles } = require('../src/index.js');
+const { getAllFiles, searchFiles } = require('../src/index.js');
 
 describe('test', () => {
   it('should print a list of all files in the directory passed in', () => {
@@ -17,5 +17,10 @@ describe('test', () => {
       'mockData/mockData/mockData.js',
       'mockData/mockData.js',
     ]);
+  });
+
+  it('should return all files within the directory if there isnt a search term', () => {
+    const filesContainingWord = searchFiles('./src', '');
+    expect(filesContainingWord).toEqual(['src/index.js']);
   });
 });
