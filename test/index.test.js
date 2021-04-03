@@ -5,4 +5,9 @@ describe('test', () => {
     const response = getAllFiles('./src');
     expect(response).toEqual(['index.js']);
   });
+
+  it('should print an error if directory does not exist', () => {
+    const response = getAllFiles('./apple');
+    expect(response).toBe('No such directory');
+  });
 });
