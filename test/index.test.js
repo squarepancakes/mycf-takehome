@@ -1,8 +1,8 @@
-const { test } = require('../src/index.js');
+const { getAllFiles } = require('../src/index.js');
 
 describe('test', () => {
-  it('should return applepie', () => {
-    const response = test('applepie');
-    expect(response).toBe('applepie');
+  it('should print a list of all files in the directory passed in', () => {
+    const response = getAllFiles('./src');
+    expect(response).toEqual(['index.js']);
   });
 });

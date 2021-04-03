@@ -1,3 +1,8 @@
-const test = (text) => text;
+const fs = require('fs');
 
-module.exports = { test };
+const getAllFiles = (dir) => {
+  const printList = fs.readdirSync(dir);
+  return printList;
+};
+
+module.exports = { getAllFiles };
