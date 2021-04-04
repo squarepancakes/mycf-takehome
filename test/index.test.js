@@ -1,4 +1,5 @@
-const { getAllFiles, searchFiles } = require('../src/index.js');
+const { getAllFiles } = require('../src/getAllFiles');
+const { searchFiles } = require('../src/searchFiles');
 const { INVALID_PATH } = require('../constants/defaultErrorMsg');
 
 const dir = '/Users/fruitcake/pancakeStack/take-home-test/govtech';
@@ -6,7 +7,11 @@ const dir = '/Users/fruitcake/pancakeStack/take-home-test/govtech';
 describe('test', () => {
   it('should print a list of all files in the directory passed in', () => {
     const response = getAllFiles('./src');
-    expect(response).toEqual(['src/index.js']);
+    expect(response).toEqual([
+      'src/getAllFiles.js',
+      'src/index.js',
+      'src/searchFiles.js',
+    ]);
   });
 
   it('should print an error if path does not exist', () => {
