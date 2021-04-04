@@ -2,15 +2,18 @@ const fs = require('fs');
 const path = require('path');
 
 const FILE_TO_IGNORE = 'node_modules';
+
 const DEFAULT_SEARCH = {
   dir: './',
   searchFilter: 'TODO',
 };
+const INVALID_PATH = 'Invalid path';
 
 const getAllFiles = (dir) => {
-  const directoryExists = fs.existsSync(dir);
-  if (!directoryExists) {
-    return 'No such directory';
+  const pathExists = fs.existsSync(dir);
+  if (!pathExists) {
+    console.log(INVALID_PATH);
+    return INVALID_PATH;
   }
 
   let fileList = [];
@@ -39,9 +42,10 @@ const searchFiles = (
   dir = DEFAULT_SEARCH.dir,
   searchFilter = DEFAULT_SEARCH.searchFilter
 ) => {
-  const directoryExists = fs.existsSync(dir);
-  if (!directoryExists) {
-    return 'No such directory';
+  const pathExists = fs.existsSync(dir);
+  if (!pathExists) {
+    console.log(INVALID_PATH);
+    return INVALID_PATH;
   }
 
   const allFilesInDir = getAllFiles(dir);

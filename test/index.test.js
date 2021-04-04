@@ -8,9 +8,9 @@ describe('test', () => {
     expect(response).toEqual(['src/index.js']);
   });
 
-  it('should print an error if directory does not exist', () => {
+  it('should print an error if path does not exist', () => {
     const response = getAllFiles('./apple');
-    expect(response).toBe('No such directory');
+    expect(response).toBe('Invalid path');
   });
 
   it('should print all the files including files nested in sub-directories', () => {
