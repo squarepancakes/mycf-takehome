@@ -1,6 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
+const FILE_TO_IGNORE = 'node_modules';
+const DEFAULT_SEARCH = {
+  dir: './',
+  searchFilter: 'TODO',
+};
+
 const getAllFiles = (dir) => {
   const directoryExists = fs.existsSync(dir);
   if (!directoryExists) {
@@ -11,23 +17,28 @@ const getAllFiles = (dir) => {
   const filesInDir = fs.readdirSync(dir);
 
   filesInDir.forEach((file) => {
-    const filePath = path.join(dir, file);
-    const stat = fs.lstatSync(filePath);
-    const isDirectory = stat.isDirectory();
+    if (file !== FILE_TO_IGNORE) {
+      const filePath = path.join(dir, file);
+      const stat = fs.lstatSync(filePath);
+      const isDirectory = stat.isDirectory();
 
-    // recursively add to the array
-    if (isDirectory) {
-      const nestedFiles = getAllFiles(filePath);
-      fileList = [...fileList, ...nestedFiles];
-    } else {
-      fileList = [...fileList, filePath];
+      // recursively add to the array
+      if (isDirectory) {
+        const nestedFiles = getAllFiles(filePath);
+        fileList = [...fileList, ...nestedFiles];
+      } else {
+        fileList = [...fileList, filePath];
+      }
     }
   });
 
   return fileList;
 };
 
-const searchFiles = (dir, searchFilter = 'TODO') => {
+const searchFiles = (
+  dir = DEFAULT_SEARCH.dir,
+  searchFilter = DEFAULT_SEARCH.searchFilter
+) => {
   const directoryExists = fs.existsSync(dir);
   if (!directoryExists) {
     return 'No such directory';
@@ -48,7 +59,7 @@ const searchFiles = (dir, searchFilter = 'TODO') => {
   const matchedFilesList = matchedFiles.map((filePath) =>
     path.resolve(filePath)
   );
-
+  console.log(matchedFilesList);
   return matchedFilesList;
 };
 
