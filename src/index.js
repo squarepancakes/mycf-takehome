@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const FILE_TO_IGNORE = 'node_modules';
+const FILES_TO_IGNORE = ['node_modules', '.git'];
 
 const DEFAULT_SEARCH = {
   dir: './',
@@ -20,7 +20,7 @@ const getAllFiles = (dir) => {
   const filesInDir = fs.readdirSync(dir);
 
   filesInDir.forEach((file) => {
-    if (file !== FILE_TO_IGNORE) {
+    if (!FILES_TO_IGNORE.includes(file)) {
       const filePath = path.join(dir, file);
       const stat = fs.lstatSync(filePath);
       const isDirectory = stat.isDirectory();

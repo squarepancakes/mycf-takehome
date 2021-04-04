@@ -42,4 +42,14 @@ describe('test', () => {
     const filesContainingWord = searchFiles('./mockData', 'todo');
     expect(filesContainingWord).toEqual([]);
   });
+
+  it('should search within ./ if no directory for search is provided', () => {
+    const filesContainingWord = searchFiles();
+    expect(filesContainingWord).toEqual([
+      '/Users/fruitcake/pancakeStack/take-home-test/govtech/mockData/mockData/mockData.js',
+      '/Users/fruitcake/pancakeStack/take-home-test/govtech/mockData/mockData.js',
+      '/Users/fruitcake/pancakeStack/take-home-test/govtech/src/index.js',
+      '/Users/fruitcake/pancakeStack/take-home-test/govtech/test/index.test.js',
+    ]);
+  });
 });
