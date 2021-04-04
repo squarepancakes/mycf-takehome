@@ -23,4 +23,12 @@ describe('test', () => {
     const filesContainingWord = searchFiles('./src', '');
     expect(filesContainingWord).toEqual(['src/index.js']);
   });
+
+  it('should return all files within the directory containing the search term', () => {
+    const filesContainingWord = searchFiles('./mockData', 'TODO');
+    expect(filesContainingWord).toEqual([
+      'mockData/mockData/mockData.js',
+      'mockData/mockData.js',
+    ]);
+  });
 });

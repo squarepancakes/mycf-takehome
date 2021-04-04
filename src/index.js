@@ -34,10 +34,21 @@ const searchFiles = (dir, searchFilter) => {
   }
 
   const allFilesInDir = getAllFiles(dir);
-
+  let matchedFiles = [];
   if (!searchFilter) {
-    return allFilesInDir;
+    matchedFiles = allFilesInDir;
+  } else {
+    allFilesInDir.forEach((file) => {
+      const fileContents = fs.readFileSync(file);
+      const containsFilter = fileContents.includes(searchFilter);
+      if (containsFilter) {
+        matchedFiles = [...matchedFiles, file];
+      }
+    });
   }
+
+  return matchedFiles;
 };
 
+// searchFiles(process.argv[2], process.argv[3]);
 module.exports = { getAllFiles, searchFiles };
