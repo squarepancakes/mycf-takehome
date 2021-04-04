@@ -73,6 +73,22 @@ Assuming that TODO is found in all files
 npm run start [directory] [searchFilter]
 ```
 
+Assuming that `directory` is not valid
+
+**Example output:**
+
+```bash
+Invalid path
+```
+
+Assuming that `searchFilter` is found in none of the files
+
+**Example output:**
+
+```
+[]
+```
+
 ## Tests and Lint
 
 ### Tests
