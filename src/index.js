@@ -1,13 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-
-const FILES_TO_IGNORE = ['node_modules', '.git'];
-
-const DEFAULT_SEARCH = {
-  dir: './',
-  searchFilter: 'TODO',
-};
-const INVALID_PATH = 'Invalid path';
+const { DEFAULT_SEARCH } = require('../constants/defaultSearchValues');
+const { FILES_TO_IGNORE } = require('../constants/defaultIgnoreFiles');
+const { INVALID_PATH } = require('../constants/defaultErrorMsg');
 
 const getAllFiles = (dir) => {
   const pathExists = fs.existsSync(dir);

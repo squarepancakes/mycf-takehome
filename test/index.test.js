@@ -1,4 +1,5 @@
 const { getAllFiles, searchFiles } = require('../src/index.js');
+const { INVALID_PATH } = require('../constants/defaultErrorMsg');
 
 const dir = '/Users/fruitcake/pancakeStack/take-home-test/govtech';
 
@@ -10,7 +11,7 @@ describe('test', () => {
 
   it('should print an error if path does not exist', () => {
     const response = getAllFiles('./apple');
-    expect(response).toBe('Invalid path');
+    expect(response).toBe(INVALID_PATH);
   });
 
   it('should print all the files including files nested in sub-directories', () => {
@@ -46,10 +47,10 @@ describe('test', () => {
   it('should search within ./ if no directory for search is provided', () => {
     const filesContainingWord = searchFiles();
     expect(filesContainingWord).toEqual([
-      '/Users/fruitcake/pancakeStack/take-home-test/govtech/mockData/mockData/mockData.js',
-      '/Users/fruitcake/pancakeStack/take-home-test/govtech/mockData/mockData.js',
-      '/Users/fruitcake/pancakeStack/take-home-test/govtech/src/index.js',
-      '/Users/fruitcake/pancakeStack/take-home-test/govtech/test/index.test.js',
+      `${dir}/constants/defaultSearchValues.js`,
+      `${dir}/mockData/mockData/mockData.js`,
+      `${dir}/mockData/mockData.js`,
+      `${dir}/test/index.test.js`,
     ]);
   });
 });
