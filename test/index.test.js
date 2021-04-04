@@ -49,9 +49,10 @@ describe('test', () => {
     expect(filesContainingWord).toEqual([]);
   });
 
-  it('should search within ./ if no directory for search is provided', () => {
+  it('should search for TODO within ./ if no directory for search is provided', () => {
     const filesContainingWord = searchFiles();
     expect(filesContainingWord).toEqual([
+      `${dir}/README.md`,
       `${dir}/constants/defaultSearchValues.js`,
       `${dir}/mockData/mockData/mockData.js`,
       `${dir}/mockData/mockData.js`,
