@@ -40,15 +40,15 @@ const searchFiles = (dir, searchFilter) => {
   } else {
     allFilesInDir.forEach((file) => {
       const fileContents = fs.readFileSync(file);
+
       const containsFilter = fileContents.includes(searchFilter);
       if (containsFilter) {
         matchedFiles = [...matchedFiles, file];
       }
     });
   }
-
-  return matchedFiles;
+  return matchedFiles.map((filePath) => path.resolve(filePath));
 };
 
-// searchFiles(process.argv[2], process.argv[3]);
+searchFiles(process.argv[2], process.argv[3]);
 module.exports = { getAllFiles, searchFiles };
