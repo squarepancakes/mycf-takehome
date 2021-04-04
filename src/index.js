@@ -27,7 +27,7 @@ const getAllFiles = (dir) => {
   return fileList;
 };
 
-const searchFiles = (dir, searchFilter) => {
+const searchFiles = (dir, searchFilter = 'TODO') => {
   const directoryExists = fs.existsSync(dir);
   if (!directoryExists) {
     return 'No such directory';
@@ -35,19 +35,21 @@ const searchFiles = (dir, searchFilter) => {
 
   const allFilesInDir = getAllFiles(dir);
   let matchedFiles = [];
-  if (!searchFilter) {
-    matchedFiles = allFilesInDir;
-  } else {
-    allFilesInDir.forEach((file) => {
-      const fileContents = fs.readFileSync(file);
 
-      const containsFilter = fileContents.includes(searchFilter);
-      if (containsFilter) {
-        matchedFiles = [...matchedFiles, file];
-      }
-    });
-  }
-  return matchedFiles.map((filePath) => path.resolve(filePath));
+  allFilesInDir.forEach((file) => {
+    const fileContents = fs.readFileSync(file);
+
+    const containsFilter = fileContents.includes(searchFilter);
+    if (containsFilter) {
+      matchedFiles = [...matchedFiles, file];
+    }
+  });
+
+  const matchedFilesList = matchedFiles.map((filePath) =>
+    path.resolve(filePath)
+  );
+
+  return matchedFilesList;
 };
 
 searchFiles(process.argv[2], process.argv[3]);

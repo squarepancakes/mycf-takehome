@@ -18,12 +18,16 @@ describe('test', () => {
     expect(response).toEqual([
       'mockData/mockData/mockData.js',
       'mockData/mockData.js',
+      'mockData/mockData2.js',
     ]);
   });
 
-  it('should return all files within the directory if there isnt a search term', () => {
-    const filesContainingWord = searchFiles('./src');
-    expect(filesContainingWord).toEqual([`${dir}/src/index.js`]);
+  it('should return search for files containing TODO no filter provided', () => {
+    const filesContainingWord = searchFiles('./mockData');
+    expect(filesContainingWord).toEqual([
+      `${dir}/mockData/mockData/mockData.js`,
+      `${dir}/mockData/mockData.js`,
+    ]);
   });
 
   it('should return all files within the directory containing the search term', () => {
@@ -32,5 +36,10 @@ describe('test', () => {
       `${dir}/mockData/mockData/mockData.js`,
       `${dir}/mockData/mockData.js`,
     ]);
+  });
+
+  it('should return an empty array if no matching files are found', () => {
+    const filesContainingWord = searchFiles('./mockData', 'todo');
+    expect(filesContainingWord).toEqual([]);
   });
 });
